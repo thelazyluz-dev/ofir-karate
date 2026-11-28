@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>אופיר קראטה · סטטיסטיקות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@500;700;800&family=Secular+One&display=swap">
+<style>
+:root{--bg:#14162e;--card:#1f2347;--card2:#272c58;--ink:#f3f1ff;--mut:#a3a6cf;--gold:#ffd23f;--blue:#8fe3ff;--red:#ff8a6a;--green:#4ade80;--line:rgba(255,255,255,.08)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -10%,#2b3070,var(--bg) 60%) fixed;color:var(--ink);font:500 15px/1.45 Assistant,Arial,sans-serif;padding:max(14px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left))}
+.wrap{max-width:860px;margin:0 auto;display:grid;gap:14px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+h1{font:30px/1.1 'Secular One',Arial,sans-serif;margin:0;color:var(--gold);text-shadow:0 3px 0 rgba(0,0,0,.35)}
+h1 small{display:block;font:700 14px Assistant,sans-serif;color:var(--mut);text-shadow:none;margin-top:4px}
+.upd{font:700 13px Assistant;color:var(--mut);display:flex;align-items:center;gap:8px}
+.upd button{font:800 13px Assistant;color:var(--ink);background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.prog{height:4px;border-radius:9px;background:var(--line);overflow:hidden}.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#ff9a2e);transition:width .3s}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.k{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 14px;display:grid;gap:2px;min-width:0}
+.k span{font:700 13px Assistant;color:var(--mut)}
+.k b{font:34px/1.05 'Secular One',sans-serif;font-variant-numeric:tabular-nums}
+.k em{font:700 12px Assistant;color:var(--mut);font-style:normal}
+.k.live b{color:var(--green)}.k.live span::before{content:'';display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--green);margin-inline-end:6px;box-shadow:0 0 0 0 rgba(74,222,128,.7);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;min-width:0}
+.card h2{font:20px 'Secular One',sans-serif;margin:0 0 10px;color:var(--ink)}
+.card h2 small{font:700 13px Assistant;color:var(--mut);margin-inline-start:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mini div{background:var(--card2);border-radius:12px;padding:8px 10px;display:grid}
+.mini span{font:700 12px Assistant;color:var(--mut)}.mini b{font:22px 'Secular One',sans-serif;font-variant-numeric:tabular-nums}
+.bars{display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:110px 1fr 54px;align-items:center;gap:8px;font:700 14px Assistant}
+.bar .t{height:14px;border-radius:7px;background:var(--line);overflow:hidden}.bar .t i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#ffb02e,var(--gold));width:0;transition:width .6s}
+.bar b{font:16px 'Secular One',sans-serif;text-align:left;font-variant-numeric:tabular-nums}
+.bar .sw{display:inline-block;width:20px;height:9px;border-radius:3px;margin-inline-end:6px;vertical-align:middle;box-shadow:0 0 0 1px rgba(0,0,0,.4)}
+.cols{display:flex;align-items:flex-end;gap:4px;height:150px;padding-top:18px;direction:ltr}
+.cols div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px;min-width:0}
+.cols i{display:block;width:100%;border-radius:5px 5px 2px 2px;background:linear-gradient(#8fe3ff,#4a7bff);min-height:2px;position:relative;transition:height .6s}
+.cols i.alt{background:linear-gradient(#ffd23f,#ff9a2e)}
+.cols small{font:700 10px Assistant;color:var(--mut);white-space:nowrap}
+.cols em{font:800 11px Assistant;font-style:normal;color:var(--ink)}
+.legend{display:flex;gap:14px;font:700 12px Assistant;color:var(--mut);margin-top:6px}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:5px;vertical-align:-1px}
+.note{font:600 12px Assistant;color:var(--mut);text-align:center}
+.err{color:var(--red)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🥋 אופיר קראטה<small>סטטיסטיקות המשחק · נתונים אנונימיים</small></h1>
+    <div class="upd"><span id="upd">טוען...</span><button id="ref">רענון</button></div>
+  </header>
+  <div class="prog"><i id="prog"></i></div>
+  <section class="kpis">
+    <div class="k live"><span>משחקים עכשיו</span><b id="now">–</b><em>בדקה האחרונה</em></div>
+    <div class="k"><span>שחקנים בסך הכל</span><b id="players">–</b><em>מכשירים שונים</em></div>
+    <div class="k"><span>שחקנים היום</span><b id="today">–</b><em id="todayS">–</em></div>
+    <div class="k"><span>זמן משחק כולל</span><b id="hours">–</b><em id="avg">–</em></div>
+  </section>
+  <section class="card"><h2>שחקנים ב־7 הימים האחרונים</h2><div class="cols" id="days"></div>
+    <div class="legend"><span><i style="background:#8fe3ff"></i>שחקנים שונים</span><span><i style="background:#ffd23f"></i>כניסות</span></div></section>
+  <section class="card"><h2>פעילות ב־12 השעות האחרונות <small>שחקנים בכל שעה</small></h2><div class="cols" id="hrs"></div></section>
+  <div class="grid2">
+    <section class="card"><h2>בוסים שנוצחו</h2><div class="bars" id="bosses"></div></section>
+    <section class="card"><h2>חגורות שהושגו</h2><div class="bars" id="belts"></div></section>
+  </div>
+  <section class="card"><h2>עוד נתונים</h2><div class="mini" id="misc"></div></section>
+  <p class="note">הנתונים נספרים רק מהאתר הציבורי, בלי שמות ובלי פרטים מזהים. "משחקים עכשיו" = מכשירים שהיו פעילים בדקה האחרונה.</p>
+</div>
+<script>
+const NS = 'ofir-karate-7f3a2', API = 'https://abacus.jasoncameron.dev/get/' + NS + '/';
+const BOSSES = [['don', 'דון'], ['oz', 'עוז'], ['rom', 'רום'], ['leo', 'לאוניד'], ['marina', 'מרינה'], ['nastia', 'נסטיה'], ['idan', 'עידן'], ['cashew', 'הקשיו הענק']];
+const BELTS = [['צהובה', '#f5cf2d'], ['כתומה', '#f08a24'], ['ירוקה', '#2f9e54'], ['כחולה', '#2d68d8'], ['סגולה', '#7b46c4'], ['חומה', '#7a4824'], ['שחורה', '#1b1b1e'], ['ניצחו הכל 🏆', '#ffd23f']];
+const $ = s => document.querySelector(s), p2 = n => String(n).padStart(2, '0');
+const day = d => d.getFullYear() + p2(d.getMonth() + 1) + p2(d.getDate());
+const nf = n => n == null ? '–' : n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e4 ? (n / 1e3).toFixed(1) + 'K' : n.toLocaleString('he-IL');
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+let done = 0, total = 1;
+async function get(k) {
+  for (let t = 0; t < 3; t++) {
+    try { const r = await fetch(API + encodeURIComponent(k)); if (r.status === 404) return 0; if (r.status === 429) { await sleep(2500); continue; }
+      const j = await r.json(); return j.value > 0 ? j.value : 0; } catch (e) { await sleep(800); }
+  }
+  return null;
+}
+/* the free counter service allows ~30 requests / 10 s, so keys are fetched one after another */
+async function seq(keys) { const out = {}; for (const k of keys) { out[k] = await get(k); done++; $('#prog').style.width = Math.min(100, done / total * 100) + '%'; await sleep(340); } return out; }
+function cols(el, items, alt) {
+  const mx = Math.max(1, ...items.map(i => Math.max(i.v || 0, i.v2 || 0)));
+  el.innerHTML = items.map(i => `<div><em>${i.v ?? '–'}</em><span style="display:flex;gap:2px;width:100%;align-items:flex-end;height:100%"><i style="height:${(i.v || 0) / mx * 100}%"></i>${alt ? `<i class="alt" style="height:${(i.v2 || 0) / mx * 100}%"></i>` : ''}</span><small>${i.l}</small></div>`).join('');
+}
+function bars(el, items) {
+  const mx = Math.max(1, ...items.map(i => i.v || 0));
+  el.innerHTML = items.map(i => `<div class="bar"><span>${i.sw ? `<span class="sw" style="background:${i.sw}"></span>` : ''}${i.l}</span><div class="t"><i style="width:${(i.v || 0) / mx * 100}%"></i></div><b>${nf(i.v)}</b></div>`).join('');
+}
+async function load() {
+  $('#upd').textContent = 'טוען...'; done = 0; $('#prog').style.width = '0';
+  const now = new Date(), m = Math.floor(Date.now() / 60000), td = day(now);
+  const days = [...Array(7)].map((_, i) => day(new Date(Date.now() - (6 - i) * 864e5)));
+  const hrs = [...Array(12)].map((_, i) => { const d = new Date(Date.now() - (11 - i) * 36e5); return { k: 'h-' + day(d) + p2(d.getHours()), l: p2(d.getHours()) + ':00' }; });
+  const first = ['on-' + (m - 1), 'on-' + m, 'players', 'u-' + td, 's-' + td, 'mins', 'sessions'];
+  const rest = [...days.flatMap(d => ['u-' + d, 's-' + d]).filter(k => !first.includes(k)), ...hrs.map(h => h.k),
+    ...BOSSES.map(b => 'win-' + b[0]), ...BELTS.map((_, i) => 'belt-' + (i + 1)), 'fight', 'taps100', 'super', 'super2', 'rom-caught', 'rom-escaped', 'share', 'dan'];
+  total = first.length + rest.length;
+  const A = await seq(first);
+  $('#now').textContent = nf(Math.max(A['on-' + (m - 1)] || 0, A['on-' + m] || 0));
+  $('#players').textContent = nf(A.players); $('#today').textContent = nf(A['u-' + td]); $('#todayS').textContent = nf(A['s-' + td]) + ' כניסות היום';
+  const hh = (A.mins || 0) / 60; $('#hours').textContent = hh >= 10 ? Math.round(hh) + ' ש׳' : hh.toFixed(1) + ' ש׳';
+  $('#avg').textContent = A.sessions ? 'ממוצע ' + Math.round((A.mins || 0) / A.sessions) + ' דק׳ לכניסה' : '–';
+  const B = Object.assign(await seq(rest), A);
+  cols($('#days'), days.map(d => ({ v: B['u-' + d], v2: B['s-' + d], l: d.slice(6, 8) + '/' + d.slice(4, 6) })), true);
+  cols($('#hrs'), hrs.map(h => ({ v: B[h.k], l: h.l })));
+  bars($('#bosses'), BOSSES.map(b => ({ l: b[1], v: B['win-' + b[0]] })));
+  bars($('#belts'), BELTS.map((b, i) => ({ l: b[0], v: B['belt-' + (i + 1)], sw: b[1] })));
+  const misc = [['קרבות', B.fight], ['מכות (בערך)', B.taps100 != null ? B.taps100 * 100 : null], ['כניסות למשחק', B.sessions], ['כוח־על', B.super], ['כוח־על 2', B.super2], ['רום נתפס', B['rom-caught']], ['רום ברח', B['rom-escaped']], ['שיתופים', B.share], ['עלו לדאן', B.dan]];
+  $('#misc').innerHTML = misc.map(([l, v]) => `<div><span>${l}</span><b>${nf(v)}</b></div>`).join('');
+  $('#upd').textContent = 'עודכן ' + p2(new Date().getHours()) + ':' + p2(new Date().getMinutes());
+}
+let busy = false; const run = async () => { if (busy) return; busy = true; try { await load(); } catch (e) { $('#upd').innerHTML = '<span class="err">שגיאה בטעינה</span>'; } busy = false; };
+$('#ref').onclick = run; run();
+/* "playing now" refreshes every 30 s */
+setInterval(async () => { if (busy) return; const m = Math.floor(Date.now() / 60000); const a = await get('on-' + (m - 1)), b = await get('on-' + m); $('#now').textContent = nf(Math.max(a || 0, b || 0)); }, 30000);
+</script>
+</body>
+</html>
