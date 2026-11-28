@@ -82,14 +82,14 @@ const nf = n => n == null ? '–' : n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >=
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let done = 0, total = 1;
 async function get(k) {
-  for (let t = 0; t < 3; t++) {
+  for (let t = 0; t < 5; t++) {
     try { const r = await fetch(API + encodeURIComponent(k)); if (r.status === 404) return 0; if (r.status === 429) { await sleep(2500); continue; }
       const j = await r.json(); return j.value > 0 ? j.value : 0; } catch (e) { await sleep(800); }
   }
   return null;
 }
 /* the free counter service allows ~30 requests / 10 s, so keys are fetched one after another */
-async function seq(keys) { const out = {}; for (const k of keys) { out[k] = await get(k); done++; $('#prog').style.width = Math.min(100, done / total * 100) + '%'; await sleep(340); } return out; }
+async function seq(keys) { const out = {}; for (const k of keys) { const t0 = Date.now(); out[k] = await get(k); done++; $('#prog').style.width = Math.min(100, done / total * 100) + '%'; await sleep(Math.max(0, 345 - (Date.now() - t0))); } return out; }
 function cols(el, items, alt) {
   const mx = Math.max(1, ...items.map(i => Math.max(i.v || 0, i.v2 || 0)));
   el.innerHTML = items.map(i => `<div><em>${i.v ?? '–'}</em><span style="display:flex;gap:2px;width:100%;align-items:flex-end;height:100%"><i style="height:${(i.v || 0) / mx * 100}%"></i>${alt ? `<i class="alt" style="height:${(i.v2 || 0) / mx * 100}%"></i>` : ''}</span><small>${i.l}</small></div>`).join('');
